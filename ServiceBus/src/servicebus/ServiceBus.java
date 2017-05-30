@@ -28,8 +28,11 @@ import org.xml.sax.SAXException;
 public class ServiceBus implements Runnable{
     
     Socket socket;
-    static HashMap<Integer,Socket>socketMap = new HashMap<Integer,Socket>();
-    static HashMap<String,Service>serviceMap = new HashMap<String,Service>();
+    static HashMap<Integer,Socket> socketMap = new HashMap<Integer,Socket>();
+    static HashMap<Integer,Socket> clientSocketMap = new HashMap<Integer,Socket>();
+    static HashMap<String,Service> serviceMap = new HashMap<String,Service>();
+    static ArrayList<Integer> clientIDList = new ArrayList<Integer>();
+    
     static int k = 1;
     
     ServiceBus(Socket socket){
@@ -137,6 +140,14 @@ public class ServiceBus implements Runnable{
     
     }
 
+    public static int generateClientID(){
+        
+        int clientID;
+        
+        return clientID;
+    }
+    
+    
     @Override
     public void run() {
         try{
@@ -150,19 +161,27 @@ public class ServiceBus implements Runnable{
                 if ( !inputLine.isEmpty() ){
                     
                     String messageParts[] = inputLine.split(" ");
-                    
-                    //int id = Integer.parseInt(messageParts[3]);
                     String serviceName = messageParts[0];
-                    int serviceID = 1; // service id should be selected from a service Hash Map messageParts[0 ]
                     
-                    if (socketMap.containsKey(serviceID)){
-                        Socket service = socketMap.get(serviceID); // getting the service socket
-                        out = new PrintWriter(service.getOutputStream(), true);
+                    if (serviceMap.containsKey(serviceName)){
+                        
+                        Service service = serviceMap.get(serviceName);
+                        int serviceID = service.getServiceId();
+                        Socket serviceSocket = socketMap.get(serviceID); // getting the service socket
+                        out = new PrintWriter(serviceSocket.getOutputStream(), true);
                         out.println("service called: " + serviceName);
                         out.flush();
+                        
                     } else {
+                        
+                        if ( serviceName.equals("list") ){
+                            
+                            System.out.println(serviceMap.keySet());
+                            
+                        }
+                        
                         out = new PrintWriter(socket.getOutputStream(), true);
-                        out.println("Command " + messageParts[1] + " is called");
+                        out.println("Command " + messageParts[0] + " is called");
                         out.flush();
                     }
                     
