@@ -28,8 +28,7 @@ import org.xml.sax.SAXException;
 public class ServiceBus implements Runnable{
     
     Socket socket;
-    static HashMap<Integer,Socket> socketMap = new HashMap<Integer,Socket>();
-    static HashMap<Integer,Socket> clientSocketMap = new HashMap<Integer,Socket>();
+    static HashMap<Long,Socket> clientSocketMap = new HashMap<Long,Socket>();
     static HashMap<String,Service> serviceMap = new HashMap<String,Service>();
     static ArrayList<Integer> clientIDList = new ArrayList<Integer>();
     
@@ -56,9 +55,12 @@ public class ServiceBus implements Runnable{
                 Socket sock = ssock.accept();
                 ServiceBus service = new ServiceBus(sock);
                 new Thread(service).start();
-                socketMap.put(k,sock);
-                System.out.println("Connected to the client"+k);
-                k++;
+                long threadId = Thread.currentThread().getId();
+                clientSocketMap.put( threadId,sock);
+                System.out.println(threadId);
+                
+                //System.out.println("Connected to the client"+k);
+                //k++;
             }
         } catch (IOException ex) {
             Logger.getLogger(ServiceBus.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,14 +141,6 @@ public class ServiceBus implements Runnable{
         }
     
     }
-
-    public static int generateClientID(){
-        
-        int clientID;
-        
-        return clientID;
-    }
-    
     
     @Override
     public void run() {
@@ -167,7 +161,10 @@ public class ServiceBus implements Runnable{
                         
                         Service service = serviceMap.get(serviceName);
                         int serviceID = service.getServiceId();
-                        Socket serviceSocket = socketMap.get(serviceID); // getting the service socket
+                        
+                        Long tmps = 1L;
+                        
+                        Socket serviceSocket = clientSocketMap.get(tmps); // getting the service socket ************* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                         out = new PrintWriter(serviceSocket.getOutputStream(), true);
                         out.println("service called: " + serviceName);
                         out.flush();
@@ -176,7 +173,13 @@ public class ServiceBus implements Runnable{
                         
                         if ( serviceName.equals("list") ){
                             
-                            System.out.println(serviceMap.keySet());
+                            Long clientID = Thread.currentThread().getId();
+                            System.out.println(clientID);
+                            Socket serviceSocket = clientSocketMap.get(1L);
+                            out = new PrintWriter(serviceSocket.getOutputStream(), true);
+                            out.println(serviceMap.keySet());
+                            out.flush();
+                        
                             
                         }
                         
@@ -187,8 +190,8 @@ public class ServiceBus implements Runnable{
                     
                 } /*else if ( messageParts[0].equals(t) ) {
                     
-                    for(int h =1; h < socketMap.size(); h++){
-                        Socket service = socketMap.get(h);
+                    for(int h =1; h < clientSocketMap.size(); h++){
+                        Socket service = clientSocketMap.get(h);
 
                         out = new PrintWriter(service.getOutputStream(), true);
                         out.println(messageParts[1]);
