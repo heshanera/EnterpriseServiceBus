@@ -42,26 +42,50 @@ public class JavaServiceDirectory {
             argType = argType.toLowerCase();
             switch(argType){
                 case "string":
-                    stringArgs.add(JavaConverter.convertToString(argList.get(i)));
+                    stringArgs.add(convertToString(argList.get(i)));
                     break;
                 case "integer":
-                    intArgs.add(JavaConverter.convertToInteger(argList.get(i)));
+                    intArgs.add(convertToInteger(argList.get(i)));
                     break;
                 case "float":
-                    floatArgs.add(JavaConverter.convertToFloat(argList.get(i)));
+                    floatArgs.add(convertToFloat(argList.get(i)));
                     break;
                 case "double":
-                    doubleArgs.add(JavaConverter.convertToDouble(argList.get(i)));
+                    doubleArgs.add(convertToDouble(argList.get(i)));
                     break;
                 case "long":
-                    longArgs.add(JavaConverter.convertToLong(argList.get(i)));
+                    longArgs.add(convertToLong(argList.get(i)));
                     break;
                 case "character":
-                    charArgs.add(JavaConverter.convertToCharacter(argList.get(i)));
+                    charArgs.add(convertToCharacter(argList.get(i)));
                     break;    
             }
             i++;
 	}
+    }
+    
+    public static String convertToString(String val){
+        return val;
+    }
+    
+    public static int convertToInteger(String val){
+        return Integer.parseInt(val);
+    }
+    
+    public static Float convertToFloat(String val){
+        return Float.parseFloat(val);
+    }
+    
+    public static Long convertToLong(String val){
+        return Long.parseLong(val);
+    }
+    
+    public static Double convertToDouble(String val){
+        return Double.parseDouble(val);
+    }
+    
+    public static char convertToCharacter(String val){
+        return val.charAt(0);
     }
     
 }
