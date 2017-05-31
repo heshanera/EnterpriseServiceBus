@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,19 +15,44 @@ import java.util.logging.Logger;
  */
 public class Services implements Runnable{
     
-    Socket socket;
+    Socket serviceSocket;
     
     public Services(Socket socket){
-        this.socket = socket;
+        this.serviceSocket = socket;
     }
     
     public static void main(String args[]) throws IOException{
-                
+        startListening();
     }
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        try{
+            PrintWriter out;
+            BufferedReader in = new BufferedReader(new InputStreamReader(serviceSocket.getInputStream()));
+            String inputLine;
+            //String t = "sendtoall";
+            
+            System.out.println("asdkjashdkjashkjdhsakjd");
+            
+            while ((inputLine = in.readLine()) != null) {
+                if (!inputLine.isEmpty()) {
+                    String messageParts[] = inputLine.split(" ");
+                    String serviceName = messageParts[0];
+                    
+                    System.out.println(serviceName);
+                }    
+            } 
+            
+            out = new PrintWriter(serviceSocket.getOutputStream(), true);
+            out.println("PLEASE REQUEST A SERVICE");
+            out.flush();
+            
+        } catch (IOException e) {
+            System.err.println("IOEXception: "+e);
+        }   
+        
     }
     
     

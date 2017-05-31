@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Level;
@@ -19,6 +20,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import services.JavaServiceDirectory;
 
 /**
  *
@@ -27,12 +29,16 @@ import org.xml.sax.SAXException;
 public class ServiceBus implements Runnable{
     
     Socket clientSocket;
+    
+    static ArrayList<Socket> serviceSocketList;
+    
     static HashMap<Integer,Socket> clientSocketMap = new HashMap<Integer,Socket>();
     static ArrayList<Integer> clientIDList = new ArrayList<Integer>();
     static HashMap<Integer,String> clientRequestMap = new HashMap<Integer,String>();
     
     static HashMap<String,Service> serviceMap = new HashMap<String,Service>();
     
+    static boolean closed = false;
     
     static int k = 1;
     
@@ -85,7 +91,7 @@ public class ServiceBus implements Runnable{
             Element rootElement;
             NodeList nodelist;
             
-            // Loads the EsbEnvConfig.xml file
+            // Loads the data in EsbEnvConfig.xml file
             factory = DocumentBuilderFactory.newInstance();
             builder = factory.newDocumentBuilder();
             document = builder.parse(new File(configFilePath));
@@ -135,13 +141,7 @@ public class ServiceBus implements Runnable{
                 
             }
             
-            
-            //serviceMap.put(serviceName, Service);
-        } catch (SAXException ex) {
-            Logger.getLogger(ServiceBus.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(ServiceBus.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (SAXException | ParserConfigurationException | IOException ex) {
             Logger.getLogger(ServiceBus.class.getName()).log(Level.SEVERE, null, ex);
         }
     
@@ -163,7 +163,6 @@ public class ServiceBus implements Runnable{
         return clientID; 
     }
     
-    
     @Override
     public void run() {
         try{
@@ -172,7 +171,6 @@ public class ServiceBus implements Runnable{
             String inputLine;
             //String t = "sendtoall";
             
-            OUTER:
             while ((inputLine = in.readLine()) != null) {
                 if (!inputLine.isEmpty()) {
                     String messageParts[] = inputLine.split(" ");
@@ -187,19 +185,50 @@ public class ServiceBus implements Runnable{
                         System.out.println(clientId);
                         
                         Service service = serviceMap.get(serviceName);
-                        int serviceID = service.getServiceId();
-                        /*
                         
-                        requesting service
+                        // check for the argument validity
+                        if (messageParts.length == service.getArguments().size() +1 ){
                         
-                        return value
+                            int serviceID = service.getServiceId();
+                            String type = service.getServiceType();
+                            ArrayList<String> argTypeList = service.getArguments();
+                            ArrayList<String> argList = new ArrayList<>(Arrays.asList(messageParts));
+                            
+                            String result = "";
+                            
+                            switch (type){
+                                
+                                case "java":
+                                    result = JavaServiceDirectory.getService(serviceID,argList,argTypeList);
+                                    break;
+                                            
+                                case "c++":
+                                    break;
+                            
+                            }
+                            
+
+                            out = new PrintWriter(clientSocket.getOutputStream(), true);
+                            out.println("Result: " + result);
+                            out.flush();
                         
-                        */
-                        String result = "return val from service";
+                        } else {
                         
-                        out = new PrintWriter(clientSocket.getOutputStream(), true);
-                        out.println(result + " " + serviceName);
-                        out.flush();
+                            String msg = "SYNTAX ERROR | " + serviceName;
+ 
+                            for(int j = 1; j < service.getArguments().size()+1; j++){
+                                msg += " arg" + j;
+                            }
+                            out = new PrintWriter(clientSocket.getOutputStream(), true);
+                            out.println("----------------------------------------------");
+                            out.println(msg);
+                            out.println("----------------------------------------------");
+                            out.flush();
+                            
+                        }
+                        
+                        
+                        
                     } else {
                         
                         switch (serviceName) {

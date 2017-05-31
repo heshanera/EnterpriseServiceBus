@@ -1,5 +1,11 @@
 deploying instructions
 
-1. start services
-2. start ESB
+1. start service bus
+2. start client
 
+
+adding a new service
+
+1. adding "run" method to the service
+2. adding details to the config file
+3. adding details to the service derectory
