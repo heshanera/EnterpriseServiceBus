@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -16,8 +17,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -27,15 +26,18 @@ import org.xml.sax.SAXException;
  */
 public class ServiceBus implements Runnable{
     
-    Socket socket;
-    static HashMap<Long,Socket> clientSocketMap = new HashMap<Long,Socket>();
-    static HashMap<String,Service> serviceMap = new HashMap<String,Service>();
+    Socket clientSocket;
+    static HashMap<Integer,Socket> clientSocketMap = new HashMap<Integer,Socket>();
     static ArrayList<Integer> clientIDList = new ArrayList<Integer>();
+    static HashMap<Integer,String> clientRequestMap = new HashMap<Integer,String>();
+    
+    static HashMap<String,Service> serviceMap = new HashMap<String,Service>();
+    
     
     static int k = 1;
     
-    ServiceBus(Socket socket){
-        this.socket = socket;
+    public ServiceBus(Socket socket){
+        this.clientSocket = socket;
     }
     
     public static void main(String args[]){
@@ -48,16 +50,19 @@ public class ServiceBus implements Runnable{
     public static void startListening(){
         try {
             ServerSocket ssock = new ServerSocket(5000);
-            System.out.println("Listening...");
+            System.out.println("Service Bus Listening...");
             
             while (true){
                 
                 Socket sock = ssock.accept();
                 ServiceBus service = new ServiceBus(sock);
                 new Thread(service).start();
-                long threadId = Thread.currentThread().getId();
-                clientSocketMap.put( threadId,sock);
-                System.out.println(threadId);
+                /*
+                int clientId = createClientID("");
+                clientSocketMap.put( clientId,sock);
+                System.out.println(clientId);
+                */
+                
                 
                 //System.out.println("Connected to the client"+k);
                 //k++;
@@ -142,65 +147,104 @@ public class ServiceBus implements Runnable{
     
     }
     
+    public static int createClientID(String serviceName){
+        
+        int clientID;
+        Random random;
+        while(true){
+            random = new Random();
+            clientID = random.nextInt(50) + 1;
+            if ( !clientIDList.contains(clientID) ) {
+                clientIDList.add(clientID);
+                clientRequestMap.put(clientID, serviceName);
+                break;
+            }
+        } 
+        return clientID; 
+    }
+    
+    
     @Override
     public void run() {
         try{
             PrintWriter out;
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String inputLine;
-            String t = "sendtoall";
+            //String t = "sendtoall";
             
-            while ((inputLine = in.readLine()) != null ){
-                
-                if ( !inputLine.isEmpty() ){
-                    
+            OUTER:
+            while ((inputLine = in.readLine()) != null) {
+                if (!inputLine.isEmpty()) {
                     String messageParts[] = inputLine.split(" ");
                     String serviceName = messageParts[0];
-                    
-                    if (serviceMap.containsKey(serviceName)){
+                    if (serviceMap.containsKey(serviceName)) {
+                        
+                        System.out.println("Client x Request service " + serviceName);
+                        
+                        
+                        int clientId = createClientID(serviceName);
+                        clientSocketMap.put( clientId,clientSocket);
+                        System.out.println(clientId);
                         
                         Service service = serviceMap.get(serviceName);
                         int serviceID = service.getServiceId();
+                        /*
                         
-                        Long tmps = 1L;
+                        requesting service
                         
-                        Socket serviceSocket = clientSocketMap.get(tmps); // getting the service socket ************* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                        out = new PrintWriter(serviceSocket.getOutputStream(), true);
-                        out.println("service called: " + serviceName);
+                        return value
+                        
+                        */
+                        String result = "return val from service";
+                        
+                        out = new PrintWriter(clientSocket.getOutputStream(), true);
+                        out.println(result + " " + serviceName);
                         out.flush();
-                        
                     } else {
                         
-                        if ( serviceName.equals("list") ){
-                            
-                            Long clientID = Thread.currentThread().getId();
-                            System.out.println(clientID);
-                            Socket serviceSocket = clientSocketMap.get(1L);
-                            out = new PrintWriter(serviceSocket.getOutputStream(), true);
-                            out.println(serviceMap.keySet());
-                            out.flush();
-                        
-                            
+                        switch (serviceName) {
+                            case "list":
+                                //System.out.println(clientID);
+                                /*
+                                Socket serviceSocket = clientSocketMap.get(1L);
+                                out = new PrintWriter(serviceSocket.getOutputStream(), true);
+                                out.println();
+                                out.flush();
+                                */
+                                
+                                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                                out.println("----------------------------------------------");
+                                out.println("Services: ");
+                                Object seriviceArray[] = serviceMap.keySet().toArray();
+                                for(Object service : seriviceArray){
+                                    out.println((String)service);
+                                }   
+                                out.println("----------------------------------------------");
+                                out.flush();
+                                break;
+                            case "exit":
+                                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                                out.println("Bye");
+                                out.flush();
+                                break;
+                            case "man":
+                                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                                out.println("----------------------------------------------");
+                                out.println("Commands: ");
+                                out.println("list: return the list of service");
+                                out.println("exit: disconnect from the service bus");
+                                out.println("connect: connect to the service bus");
+                                out.println("----------------------------------------------");
+                                break;
+                            default:
+                                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                                out.println("INVALID COMMAND");
+                                out.flush();
+                                break;
                         }
-                        
-                        out = new PrintWriter(socket.getOutputStream(), true);
-                        out.println("Command " + messageParts[0] + " is called");
-                        out.flush();
                     }
-                    
-                } /*else if ( messageParts[0].equals(t) ) {
-                    
-                    for(int h =1; h < clientSocketMap.size(); h++){
-                        Socket service = clientSocketMap.get(h);
-
-                        out = new PrintWriter(service.getOutputStream(), true);
-                        out.println(messageParts[1]);
-                        out.flush();
-                    }
-                    
-                }*/ else {
-                    
-                    out = new PrintWriter(socket.getOutputStream(), true);
+                } else {
+                    out = new PrintWriter(clientSocket.getOutputStream(), true);
                     out.println("PLEASE REQUEST A SERVICE");
                     out.flush();
                 }
