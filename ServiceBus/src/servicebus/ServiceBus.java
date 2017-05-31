@@ -29,21 +29,21 @@ import services.JavaServiceDirectory;
 public class ServiceBus implements Runnable{
     
     Socket clientSocket;
+    int ClientID;
+    
     
     static ArrayList<Socket> serviceSocketList;
-    
     static HashMap<Integer,Socket> clientSocketMap = new HashMap<Integer,Socket>();
     static ArrayList<Integer> clientIDList = new ArrayList<Integer>();
     static HashMap<Integer,String> clientRequestMap = new HashMap<Integer,String>();
-    
     static HashMap<String,Service> serviceMap = new HashMap<String,Service>();
-    
     static boolean closed = false;
     
     static int k = 1;
     
-    public ServiceBus(Socket socket){
+    public ServiceBus(Socket socket, int clientID){
         this.clientSocket = socket;
+        this.ClientID = clientID;
     }
     
     public static void main(String args[]){
@@ -61,17 +61,9 @@ public class ServiceBus implements Runnable{
             while (true){
                 
                 Socket sock = ssock.accept();
-                ServiceBus service = new ServiceBus(sock);
-                new Thread(service).start();
-                /*
-                int clientId = createClientID("");
-                clientSocketMap.put( clientId,sock);
-                System.out.println(clientId);
-                */
-                
-                
-                //System.out.println("Connected to the client"+k);
-                //k++;
+                ServiceBus service = new ServiceBus(sock,k);
+                new Thread(service).start();                
+                System.out.println("*** Connected to the client"+k); k++;
             }
         } catch (IOException ex) {
             Logger.getLogger(ServiceBus.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,20 +139,20 @@ public class ServiceBus implements Runnable{
     
     }
     
-    public static int createClientID(String serviceName){
+    public static int createRequestID(String serviceName){
         
-        int clientID;
+        int requestID;
         Random random;
         while(true){
             random = new Random();
-            clientID = random.nextInt(50) + 1;
-            if ( !clientIDList.contains(clientID) ) {
-                clientIDList.add(clientID);
-                clientRequestMap.put(clientID, serviceName);
+            requestID = random.nextInt(50) + 1;
+            if ( !clientIDList.contains(requestID) ) {
+                clientIDList.add(requestID);
+                clientRequestMap.put(requestID, serviceName);
                 break;
             }
         } 
-        return clientID; 
+        return requestID; 
     }
     
     @Override
@@ -177,14 +169,19 @@ public class ServiceBus implements Runnable{
                     String serviceName = messageParts[0];
                     if (serviceMap.containsKey(serviceName)) {
                         
-                        System.out.println("Client x Request service " + serviceName);
-                        
-                        
-                        int clientId = createClientID(serviceName);
-                        clientSocketMap.put( clientId,clientSocket);
-                        System.out.println(clientId);
-                        
+                        int requestId = createRequestID(serviceName);
+                        clientSocketMap.put( requestId,clientSocket);
                         Service service = serviceMap.get(serviceName);
+                        
+                        System.out.println("----------------------------------------------\n");
+                        
+                        System.out.println("Request Info: ");
+                        System.out.println("Service Name: " + serviceName);
+                        System.out.println("Client ID: " + this.ClientID);
+                        System.out.println("Request ID: " + requestId);
+                        
+                        System.out.println("\n----------------------------------------------");
+                        
                         
                         // check for the argument validity
                         if (messageParts.length == service.getArguments().size() +1 ){
@@ -209,7 +206,9 @@ public class ServiceBus implements Runnable{
                             
 
                             out = new PrintWriter(clientSocket.getOutputStream(), true);
-                            out.println("Result: " + result);
+                            out.println("----------------------------------------------\n");
+                            out.println("Result:\n" + result);
+                            out.println("\n----------------------------------------------");
                             out.flush();
                         
                         } else {
@@ -220,9 +219,9 @@ public class ServiceBus implements Runnable{
                                 msg += " arg" + j;
                             }
                             out = new PrintWriter(clientSocket.getOutputStream(), true);
-                            out.println("----------------------------------------------");
+                            out.println("----------------------------------------------\n");
                             out.println(msg);
-                            out.println("----------------------------------------------");
+                            out.println("\n----------------------------------------------");
                             out.flush();
                             
                         }
@@ -242,13 +241,20 @@ public class ServiceBus implements Runnable{
                                 */
                                 
                                 out = new PrintWriter(clientSocket.getOutputStream(), true);
-                                out.println("----------------------------------------------");
-                                out.println("Services: ");
+                                out.println("----------------------------------------------\n");
+                                out.println("Services: \n");
                                 Object seriviceArray[] = serviceMap.keySet().toArray();
+                                String serviceInfo = "";
                                 for(Object service : seriviceArray){
-                                    out.println((String)service);
+                                    
+                                    int i = 1;
+                                    serviceInfo = (String)service;
+                                    for (String argument : serviceMap.get(serviceInfo).getArguments()) {
+                                        serviceInfo += " <param"+i+">"; i++;
+                                    }
+                                    out.println(serviceInfo);
                                 }   
-                                out.println("----------------------------------------------");
+                                out.println("\n----------------------------------------------");
                                 out.flush();
                                 break;
                             case "exit":
@@ -258,13 +264,13 @@ public class ServiceBus implements Runnable{
                                 break;
                             case "man":
                                 out = new PrintWriter(clientSocket.getOutputStream(), true);
-                                out.println("----------------------------------------------");
+                                out.println("----------------------------------------------\n");
                                 out.println("Commands: ");
                                 out.println("list: return the list of service");
                                 out.println("exit: disconnect from the service bus");
                                 out.println("connect: connect to the service bus");
-                                out.println("----------------------------------------------");
-                                break;
+                                out.println("\n----------------------------------------------");
+                                break;    
                             default:
                                 out = new PrintWriter(clientSocket.getOutputStream(), true);
                                 out.println("INVALID COMMAND");

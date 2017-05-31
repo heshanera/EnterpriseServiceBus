@@ -68,6 +68,7 @@ public class RabinKarp
             long subStringHash = 0;
             int patternLength = ptrn.length();
             int textLength = txt.length();
+            boolean noMatch = true;
 
             int end = patternLength - 1;
 
@@ -82,9 +83,11 @@ public class RabinKarp
                     {
                         //System.out.println("Match found from " + i + " to " + end);
                         result += "Match found from " + i + " to " + end + "\n";
+                        noMatch = false;
                     }
                 }
             }		
+            if (noMatch == true) result = "No match found";
             return result;
 	}
         
