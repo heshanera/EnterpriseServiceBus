@@ -1,7 +1,8 @@
 package services;
 
 import java.util.ArrayList;
-import org.python.core.PyInstance;  
+import java.util.HashMap;
+import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;  
 
 
@@ -11,32 +12,28 @@ import org.python.util.PythonInterpreter;
  */
 public class PythonServiceDirectory {
 
-    public static String getService(int serviceID, ArrayList<String> argList, ArrayList<String> argTypeList) {
+    public static String getService(int serviceID, ArrayList<String> argList) {
         
-        String result = "";
-        
-        PythonServiceDirectory ie = new PythonServiceDirectory();  
-        ie.execfile("src/services/PythonServices/hello.py");  
-        PyInstance hello = ie.createClass("Hello", "None");  
-        hello.invoke("run");
-        
+        String result;
+        HashMap<Integer,String> pythonFileMap = new HashMap<>();
+        pythonFileMap.put(2, "Calculator.py");
+      
+        result = run(pythonFileMap.get(serviceID),argList);  
         return result;
     }
     
-    PythonInterpreter interpreter = null;  
-
-
-   public PythonServiceDirectory() {  
-      PythonInterpreter.initialize(System.getProperties(), System.getProperties(), new String[0]);  
-      this.interpreter = new PythonInterpreter();  
-   }  
-
-   void execfile( final String fileName ) {  
-      this.interpreter.execfile(fileName);  
-   }  
-
-   PyInstance createClass( final String className, final String opts ) {  
-      return (PyInstance) this.interpreter.eval(className + "(" + opts + ")");  
-   }  
+    public static String run(String PythonFile,ArrayList<String> argList){
+        
+        argList.remove(0);
+        String argsList = "";
+        argsList = argList.stream().map((arg) -> ("'"+arg + "',")).reduce(argsList, String::concat);
+        argsList = argsList.substring(0, argsList.length()-1);
+        
+        PythonInterpreter interpreter = new PythonInterpreter();
+        interpreter.execfile("src/services/PythonServices/Calculator.py");
+        PyObject result = interpreter.eval("repr(run("+argsList+"))");
+        return result.toString();
+    }
+    
     
 }

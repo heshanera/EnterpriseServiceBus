@@ -18,10 +18,8 @@
       <ServiceID>2</ServiceID> 
       <ServiceType>python</ServiceType>
       <Arguments>  
-        <NoOfArguments>3</NoOfArguments>  
-        <ArgumentType>Float</ArgumentType>
+        <NoOfArguments>1</NoOfArguments>  
         <ArgumentType>String</ArgumentType>
-        <ArgumentType>Float</ArgumentType>
       </Arguments>
       <DeadLetterDestination>DeadLetter</DeadLetterDestination>
       <AuthConstraint>app-1</AuthConstraint>

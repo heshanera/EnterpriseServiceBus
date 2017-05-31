@@ -203,7 +203,7 @@ public class ServiceBus implements Runnable{
                                     break;
                                     
                                 case "python":
-                                    result = PythonServiceDirectory.getService(serviceID,argList,argTypeList);
+                                    result = PythonServiceDirectory.getService(serviceID,argList);
                                     break;
                             
                             }
