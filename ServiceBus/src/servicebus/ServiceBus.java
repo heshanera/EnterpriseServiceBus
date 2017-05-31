@@ -21,6 +21,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import services.JavaServiceDirectory;
+import services.PythonServiceDirectory;
 
 /**
  *
@@ -31,11 +32,10 @@ public class ServiceBus implements Runnable{
     Socket clientSocket;
     int ClientID;
     
-    
     static ArrayList<Socket> serviceSocketList;
+    static ArrayList<Integer> requestIDList = new ArrayList();
+    
     static HashMap<Integer,Socket> clientSocketMap = new HashMap<Integer,Socket>();
-    static ArrayList<Integer> clientIDList = new ArrayList<Integer>();
-    static HashMap<Integer,String> clientRequestMap = new HashMap<Integer,String>();
     static HashMap<String,Service> serviceMap = new HashMap<String,Service>();
     static boolean closed = false;
     
@@ -146,9 +146,8 @@ public class ServiceBus implements Runnable{
         while(true){
             random = new Random();
             requestID = random.nextInt(50) + 1;
-            if ( !clientIDList.contains(requestID) ) {
-                clientIDList.add(requestID);
-                clientRequestMap.put(requestID, serviceName);
+            if ( !requestIDList.contains(requestID) ) {
+                requestIDList.add(requestID);
                 break;
             }
         } 
@@ -170,7 +169,7 @@ public class ServiceBus implements Runnable{
                     if (serviceMap.containsKey(serviceName)) {
                         
                         int requestId = createRequestID(serviceName);
-                        clientSocketMap.put( requestId,clientSocket);
+                        clientSocketMap.put( this.ClientID,clientSocket);
                         Service service = serviceMap.get(serviceName);
                         
                         System.out.println("----------------------------------------------\n");
@@ -187,7 +186,7 @@ public class ServiceBus implements Runnable{
                         if (messageParts.length == service.getArguments().size() +1 ){
                         
                             int serviceID = service.getServiceId();
-                            String type = service.getServiceType();
+                            String type = service.getServiceType().toLowerCase();
                             ArrayList<String> argTypeList = service.getArguments();
                             ArrayList<String> argList = new ArrayList<>(Arrays.asList(messageParts));
                             
@@ -199,7 +198,12 @@ public class ServiceBus implements Runnable{
                                     result = JavaServiceDirectory.getService(serviceID,argList,argTypeList);
                                     break;
                                             
-                                case "c++":
+                                case "cpp":
+                                    //result = CppServiceDirectory.getService(serviceID,argList,argTypeList);
+                                    break;
+                                    
+                                case "python":
+                                    result = PythonServiceDirectory.getService(serviceID,argList,argTypeList);
                                     break;
                             
                             }
@@ -210,6 +214,7 @@ public class ServiceBus implements Runnable{
                             out.println("Result:\n" + result);
                             out.println("\n----------------------------------------------");
                             out.flush();
+                            requestIDList.remove((Integer)requestId);
                         
                         } else {
                         
