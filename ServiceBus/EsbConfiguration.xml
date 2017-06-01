@@ -12,6 +12,7 @@
       <DeadLetterDestination>DeadLetter</DeadLetterDestination>
       <AuthConstraint>app-1</AuthConstraint>
       <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>Rabing-Karp Algorithm for string matching</Info>
    </Service>
    <Service>
       <ServiceName>calc</ServiceName>
@@ -24,6 +25,7 @@
       <DeadLetterDestination>DeadLetter</DeadLetterDestination>
       <AuthConstraint>app-1</AuthConstraint>
       <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>Simple Calculator that solve Expressions</Info>
    </Service>
    <Service>
       <ServiceName>fib</ServiceName>
@@ -36,5 +38,6 @@
       <DeadLetterDestination>DeadLetter</DeadLetterDestination>
       <AuthConstraint>app-1</AuthConstraint>
       <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>Get Numbers in th Fibonacci sequence</Info>
    </Service>
 </EsbConfiguration>

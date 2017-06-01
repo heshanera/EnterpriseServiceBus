@@ -266,17 +266,31 @@ public class ServiceBus implements Runnable{
                                 break;
                             case "exit":
                                 out = new PrintWriter(clientSocket.getOutputStream(), true);
-                                out.println("Bye");
+                                out.println("_exit");
                                 out.flush();
                                 break;
                             case "man":
                                 out = new PrintWriter(clientSocket.getOutputStream(), true);
-                                out.println("----------------------------------------------\n");
-                                out.println("Commands: ");
-                                out.println("list: return the list of service");
-                                out.println("exit: disconnect from the service bus");
-                                out.println("connect: connect to the service bus");
-                                out.println("\n----------------------------------------------");
+                                if (messageParts.length == 2){
+                                    
+                                    if (serviceMap.containsKey(messageParts[1])){
+                                        
+                                        out.println("----------------------------------------------\n");
+                                        out.println("Commands: ");
+                                        out.println("\n----------------------------------------------");
+                                        
+                                    }
+                                    
+                                } else {
+                                    out.println("----------------------------------------------\n");
+                                    out.println("Commands: ");
+                                    out.println("man: return the list of commands");
+                                    out.println("man <serviceName>: return the service info");
+                                    out.println("list: return the list of service");
+                                    out.println("exit: disconnect from the service bus");
+                                    out.println("connect: connect to the service bus");
+                                    out.println("\n----------------------------------------------");
+                                }    
                                 break;    
                             default:
                                 out = new PrintWriter(clientSocket.getOutputStream(), true);

@@ -22,7 +22,7 @@ public class CppServiceDirectory {
         
         // converting argument types ArrayList into string Array
         String[] argTypeListArray = new String[argTypeList.size()];
-        argTypeListArray = argList.toArray(argTypeListArray);
+        argTypeListArray = argTypeList.toArray(argTypeListArray);
         
         // calling the native method
         CppServiceDirectory cppServiceDirectory = new CppServiceDirectory();

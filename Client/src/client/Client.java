@@ -65,7 +65,12 @@ public class Client implements Runnable{
         String responseLine;
         try{
             while ((responseLine = is.readLine()) != null){
-                System.out.println(responseLine);
+                if (!responseLine.equals("_exit")){
+                    System.out.println(responseLine);
+                } else {
+                    System.out.println("Bye!");
+                    break;
+                }
             }
             closed = true;
         } catch (IOException e){

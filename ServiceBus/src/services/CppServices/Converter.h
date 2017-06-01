@@ -20,12 +20,12 @@ public:
     jstring stringTojstring(std::string);
     std::string jstringTostring(jstring);
     
-    std::string convertToString(jstring);
-    int convertToInteger(jstring);
-    float convertToFloat(jstring);
-    double convertToDouble(jstring);
-    long convertToLong(jstring);
-    char convertToCharacter(jstring);
+    std::string convertToString(std::string);
+    int convertToInteger(std::string);
+    float convertToFloat(std::string);
+    double convertToDouble(std::string);
+    long convertToLong(std::string);
+    char convertToCharacter(std::string);
     
     
 private:

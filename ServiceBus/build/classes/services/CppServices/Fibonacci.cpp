@@ -15,7 +15,7 @@ Fibonacci::~Fibonacci() {}
 
 
 std::string Fibonacci::run(int val){
-    int result = fib(40);
+    int result = fib(val);
     std::string strResult = std::to_string(result);
     return strResult;
 }
