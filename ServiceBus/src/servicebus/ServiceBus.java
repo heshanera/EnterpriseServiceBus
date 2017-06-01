@@ -298,6 +298,7 @@ public class ServiceBus implements Runnable{
                             default:
                                 out = new PrintWriter(clientSocket.getOutputStream(), true);
                                 out.println("INVALID COMMAND");
+                                out.println("PLEASE ENTER 'man' TO GET THE LIST OF COMMANDS");
                                 out.flush();
                                 break;
                         }
