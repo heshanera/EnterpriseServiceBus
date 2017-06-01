@@ -4,7 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.h</itemPath>
       <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.h</itemPath>
+      <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Fibonacci.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -13,7 +15,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.cpp</itemPath>
       <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.cpp</itemPath>
+      <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Fibonacci.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -39,30 +43,43 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
-        <cTool>
-          <incDir>
-            <pElem>/home/usr/lib/jvm/java-8-openjdk/include</pElem>
-            <pElem>/home/usr/lib/jvm/java-8-openjdk/include/linux</pElem>
-          </incDir>
-          <commandLine>-shared -m64</commandLine>
-        </cTool>
         <ccTool>
           <incDir>
-            <pElem>/home/usr/lib/jvm/java-8-openjdk/include</pElem>
-            <pElem>/home/usr/lib/jvm/java-8-openjdk/include/linux</pElem>
+            <pElem>/home/usr/lib/jvm/default/include</pElem>
+            <pElem>/home/usr/lib/jvm/default/include/linux</pElem>
           </incDir>
-          <commandLine>-shared -m64</commandLine>
+          <commandLine>-shared</commandLine>
         </ccTool>
         <linkerTool>
           <output>dist/libCppServices.so</output>
         </linkerTool>
       </compileType>
+      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Fibonacci.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Fibonacci.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -88,12 +105,32 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Fibonacci.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Fibonacci.h"
             ex="false"
             tool="3"
             flavor2="0">

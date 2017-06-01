@@ -1,16 +1,18 @@
 #include <jni.h>
 #include <iostream>
 #include "CppServiceDirectory.h"
+#include "Converter.h"
+#include "Fibonacci.h"
 
 JNIEXPORT jstring JNICALL 
 Java_services_CppServiceDirectory_callNativeMethod(JNIEnv* env, jobject obj, jint serviceID, jobjectArray argList, jobjectArray argTypeList) {
     
     
-    //std::string stringResult;
-    //jstring jstringResult;
+    //const char * stringResult;
+    jstring jstringResult;
     
     /******* Converting arguments ********************************************************/
-    /*
+    
     std::string *stringArgs = new std::string[10];
     int *intArgs = new int[10];
     float *floatArgs = new float[10];
@@ -52,18 +54,20 @@ Java_services_CppServiceDirectory_callNativeMethod(JNIEnv* env, jobject obj, jin
                 break;    
         }
     }
-    */
     
-    /*
+    std::string stringResult;
+    
     switch (serviceID){
         
         case 3:
-            stringResult = "heshan"; //  call the cpp method
+            Fibonacci fib;
+            stringResult = fib.run(10);//"heshan"; //  call the cpp method
             break;
     
     }
-    */
-    //jstringResult = (jstring)"heshan";//converter.stringTojstring(stringResult);
-    return (jstring)"heshan"; //jstringResult;    
+    
+     
+    const char * resultCharArr = stringResult.c_str();
+    return env->NewStringUTF(resultCharArr);
 }
 

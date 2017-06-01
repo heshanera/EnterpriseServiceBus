@@ -25,7 +25,8 @@ public class CppServiceDirectory {
         argTypeListArray = argList.toArray(argTypeListArray);
         
         // calling the native method
-        String result = new CppServiceDirectory().callNativeMethod(serviceID, argListArray, argTypeListArray);
+        CppServiceDirectory cppServiceDirectory = new CppServiceDirectory();
+        String result = cppServiceDirectory.callNativeMethod(serviceID, argListArray, argTypeListArray);
             
         return result;
     }
