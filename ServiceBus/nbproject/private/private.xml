@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/EsbConfiguration.xml</file>
             <file>file:/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/servicebus/ServiceBus.java</file>
             <file>file:/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/JavaServiceDirectory.java</file>
             <file>file:/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServiceDirectory.java</file>
             <file>file:/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/PythonServiceDirectory.java</file>
             <file>file:/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/javaServices/RabinKarp.java</file>
-            <file>file:/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/PythonServices/Calculator.py</file>
         </group>
     </open-files>
 </project-private>

@@ -10,12 +10,12 @@ import services.javaServices.*;
 public class JavaServiceDirectory {
 
     
-    static ArrayList<String> stringArgs = new ArrayList();
-    static ArrayList<Integer> intArgs = new ArrayList();
-    static ArrayList<Float> floatArgs = new ArrayList();
-    static ArrayList<Long> longArgs = new ArrayList();
-    static ArrayList<Double> doubleArgs = new ArrayList();
-    static ArrayList<Character> charArgs = new ArrayList();
+    static ArrayList<String> stringArgs = new ArrayList<>();
+    static ArrayList<Integer> intArgs = new ArrayList<>();
+    static ArrayList<Float> floatArgs = new ArrayList<>();
+    static ArrayList<Long> longArgs = new ArrayList<>();
+    static ArrayList<Double> doubleArgs = new ArrayList<>();
+    static ArrayList<Character> charArgs = new ArrayList<>();
     
     
     public static String getService(int serviceID, ArrayList<String> argList, ArrayList<String> argTypeList){

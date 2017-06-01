@@ -14,3 +14,6 @@ adding a new service
 creating the header file the native method
 
 javah -o ServiceBus/src/services/CppServices/CppServiceDirectory.h -classpath ServiceBus/build/classes/ services.CppServiceDirectory
+
+Creating the Native Library Header File:
+	# javah -o CppServiceDirectory.h -classpath ServiceBus/build/classes/ services.CppServiceDirectory

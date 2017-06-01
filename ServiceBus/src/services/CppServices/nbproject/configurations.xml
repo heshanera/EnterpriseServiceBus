@@ -4,7 +4,6 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.h</itemPath>
       <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -14,7 +13,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.cpp</itemPath>
       <itemPath>/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -59,16 +57,6 @@
           <output>dist/libCppServices.so</output>
         </linkerTool>
       </compileType>
-      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.cpp"
             ex="false"
             tool="1"
@@ -100,16 +88,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.cpp"
             ex="false"
             tool="1"

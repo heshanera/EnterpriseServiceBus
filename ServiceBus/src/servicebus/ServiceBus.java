@@ -34,7 +34,7 @@ public class ServiceBus implements Runnable{
     int ClientID;
     
     static ArrayList<Socket> serviceSocketList;
-    static ArrayList<Integer> requestIDList = new ArrayList();
+    static ArrayList<Integer> requestIDList = new ArrayList<>();
     
     static HashMap<Integer,Socket> clientSocketMap = new HashMap<Integer,Socket>();
     static HashMap<String,Service> serviceMap = new HashMap<String,Service>();
