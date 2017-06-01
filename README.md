@@ -1,5 +1,5 @@
 # EnterpriseServiceBus
-Java Enterprise Service Bus which enables multiple services to interact with each other. Implemented using java sockets
+Service Bus which enables multiple services to interact with each other. Implemented using java sockets, Java Native Interface (JNI) and jython library. Service Bus can interact with java, C++ and python. 
 
 
 ## High-Level Architecture
