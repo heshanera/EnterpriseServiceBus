@@ -15,6 +15,7 @@ public class Service {
     private String retryPolicy;
     private int serviceId;
     private ArrayList<String> arguments;
+    private String info; 
 
     public String getServiceName() {
         return serviceName;
@@ -72,4 +73,12 @@ public class Service {
         this.arguments = arguments;
     }
     
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
 }

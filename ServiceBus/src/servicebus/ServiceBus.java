@@ -100,6 +100,7 @@ public class ServiceBus implements Runnable{
             String retryPolicy;
             int serviceId;
             ArrayList<String> arguments;
+            String serviceInfo;
             
             for(int i = 0; i < services; i++)
             {
@@ -122,6 +123,7 @@ public class ServiceBus implements Runnable{
                 deadLetterDestination =  childNodeList.item(9).getTextContent();
                 authConstraint =  childNodeList.item(11).getTextContent();
                 retryPolicy =  childNodeList.item(13).getTextContent();
+                serviceInfo = childNodeList.item(15).getTextContent();
                 
                 service.setServiceName(serviceName);
                 service.setServiceId(serviceId);
@@ -130,6 +132,7 @@ public class ServiceBus implements Runnable{
                 service.setDeadLetterDestination(deadLetterDestination);
                 service.setAuthConstraint(authConstraint);
                 service.setRetryPolicy(retryPolicy);
+                service.setInfo(serviceInfo);
                 
                 serviceMap.put(serviceName, service);
                 
@@ -275,8 +278,9 @@ public class ServiceBus implements Runnable{
                                     
                                     if (serviceMap.containsKey(messageParts[1])){
                                         
+                                        Service service = serviceMap.get(messageParts[1]);
                                         out.println("----------------------------------------------\n");
-                                        out.println("Commands: ");
+                                        out.println(service.getInfo());
                                         out.println("\n----------------------------------------------");
                                         
                                     }
