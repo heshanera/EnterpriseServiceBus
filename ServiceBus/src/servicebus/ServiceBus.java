@@ -292,7 +292,6 @@ public class ServiceBus implements Runnable{
                                     out.println("man <serviceName>: return the service info");
                                     out.println("list: return the list of service");
                                     out.println("exit: disconnect from the service bus");
-                                    out.println("connect: connect to the service bus");
                                     out.println("\n----------------------------------------------");
                                 }    
                                 break;    
