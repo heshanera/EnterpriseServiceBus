@@ -25,4 +25,16 @@
       <AuthConstraint>app-1</AuthConstraint>
       <RetryPolicy>100-sec-retry</RetryPolicy>
    </Service>
+   <Service>
+      <ServiceName>fib</ServiceName>
+      <ServiceID>3</ServiceID> 
+      <ServiceType>cpp</ServiceType>
+      <Arguments>  
+        <NoOfArguments>1</NoOfArguments>  
+        <ArgumentType>Integer</ArgumentType>
+      </Arguments>
+      <DeadLetterDestination>DeadLetter</DeadLetterDestination>
+      <AuthConstraint>app-1</AuthConstraint>
+      <RetryPolicy>100-sec-retry</RetryPolicy>
+   </Service>
 </EsbConfiguration>

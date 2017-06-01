@@ -24,9 +24,19 @@ public class JavaServiceDirectory {
         String result = "";
         switch (serviceID){
             
+            /** Adding a new Service **/
             case 1:
                 result = RabinKarp.run(stringArgs.get(0),stringArgs.get(1));
                 break;
+            /**
+             * ex:
+             * 
+             * case <serviceID> :
+             *      result = <ClassName>.run(<param1> , <param2>, <param3>, ...) 
+             * 
+             * 
+             */    
+                
             
         }
         return result;

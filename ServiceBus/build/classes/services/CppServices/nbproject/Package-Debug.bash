@@ -13,8 +13,8 @@ CND_BUILDDIR=build
 CND_DLIB_EXT=so
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libCppServices.${CND_DLIB_EXT}
-OUTPUT_BASENAME=libCppServices.${CND_DLIB_EXT}
+OUTPUT_PATH=dist/libCppServices.so
+OUTPUT_BASENAME=libCppServices.so
 PACKAGE_TOP_DIR=libCppServices.so/
 
 # Functions

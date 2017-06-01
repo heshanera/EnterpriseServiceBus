@@ -8,15 +8,28 @@ import java.util.ArrayList;
  */
 public class CppServiceDirectory {
     
+    static {
+        System.load("/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/dist/libCppServices.so");
+    }
+    
+    
     public static String getService(int serviceID, ArrayList<String> argList, ArrayList<String> argTypeList){
         
-        String result = "";
+        // converting argument ArrayList into string Array
+        argList.remove(0); // removing the service name
+        String[] argListArray = new String[argList.size()];
+        argListArray = argList.toArray(argListArray);
         
-        new CppServiceDirectory().nativePrint();
+        // converting argument types ArrayList into string Array
+        String[] argTypeListArray = new String[argTypeList.size()];
+        argTypeListArray = argList.toArray(argTypeListArray);
         
+        // calling the native method
+        String result = new CppServiceDirectory().callNativeMethod(serviceID, argListArray, argTypeListArray);
+            
         return result;
     }
-
-    private native void nativePrint();
+    
+    private native String callNativeMethod(int serviceID, String[] argList, String[] argTypeList);
     
 }

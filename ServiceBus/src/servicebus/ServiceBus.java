@@ -20,6 +20,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import services.CppServiceDirectory;
 import services.JavaServiceDirectory;
 import services.PythonServiceDirectory;
 
@@ -114,6 +115,7 @@ public class ServiceBus implements Runnable{
                 int noOfArguments =  Integer.parseInt(childNodeList.item(7).getChildNodes().item(1).getTextContent());
                 for (int j = 0; j < noOfArguments; j++){
                     String argType = childNodeList.item(7).getChildNodes().item(3+(j*2)).getTextContent();
+                    argType = argType.toLowerCase();
                     arguments.add(argType);
                 }
                 
@@ -199,7 +201,7 @@ public class ServiceBus implements Runnable{
                                     break;
                                             
                                 case "cpp":
-                                    //result = CppServiceDirectory.getService(serviceID,argList,argTypeList);
+                                    result = CppServiceDirectory.getService(serviceID,argList,argTypeList);
                                     break;
                                     
                                 case "python":

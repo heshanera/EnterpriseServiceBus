@@ -34,15 +34,17 @@ include Makefile
 OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES= \
+	${OBJECTDIR}/_ext/299bfa85/Converter.o \
+	${OBJECTDIR}/_ext/299bfa85/CppServiceDirectory.o
 
 
 # C Compiler Flags
-CFLAGS=-shared -m32
+CFLAGS=-shared -m64
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-shared -m64
+CXXFLAGS=-shared -m64
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -59,7 +61,17 @@ LDLIBSOPTIONS=
 
 dist/libCppServices.so: ${OBJECTFILES}
 	${MKDIR} -p dist
-	${LINK.c} -o dist/libCppServices.so ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+	${LINK.cc} -o dist/libCppServices.so ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
+
+${OBJECTDIR}/_ext/299bfa85/Converter.o: /home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.cpp
+	${MKDIR} -p ${OBJECTDIR}/_ext/299bfa85
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/home/usr/lib/jvm/java-8-openjdk/include -I/home/usr/lib/jvm/java-8-openjdk/include/linux -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/299bfa85/Converter.o /home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/Converter.cpp
+
+${OBJECTDIR}/_ext/299bfa85/CppServiceDirectory.o: /home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.cpp
+	${MKDIR} -p ${OBJECTDIR}/_ext/299bfa85
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/home/usr/lib/jvm/java-8-openjdk/include -I/home/usr/lib/jvm/java-8-openjdk/include/linux -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/299bfa85/CppServiceDirectory.o /home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/CppServiceDirectory.cpp
 
 # Subprojects
 .build-subprojects:

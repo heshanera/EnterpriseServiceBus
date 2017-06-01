@@ -1,3 +1,6 @@
 /Client/nbproject/private/
 /Client/build/
 /ServiceBus/dist/
+/ServiceBus/src/services/CppServices/build/
+/ServiceBus/src/services/CppServices/dist/
+/Client/dist/

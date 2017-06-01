@@ -9,3 +9,8 @@ adding a new service
 1. adding "run" method to the service
 2. adding details to the config file
 3. adding details to the service derectory
+
+
+creating the header file the native method
+
+javah -o ServiceBus/src/services/CppServices/CppServiceDirectory.h -classpath ServiceBus/build/classes/ services.CppServiceDirectory
