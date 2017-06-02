@@ -54,4 +54,17 @@
       <RetryPolicy>100-sec-retry</RetryPolicy>
       <Info>String matching using a brute force method</Info>
    </Service>
+   <Service>
+      <ServiceName>huffman</ServiceName>
+      <ServiceID>5</ServiceID> 
+      <ServiceType>java</ServiceType>
+      <Arguments>  
+        <NoOfArguments>1</NoOfArguments>  
+        <ArgumentType>String</ArgumentType>
+      </Arguments>
+      <DeadLetterDestination>DeadLetter</DeadLetterDestination>
+      <AuthConstraint>app-1</AuthConstraint>
+      <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>Converting an String in to a Huffman Code</Info>
+   </Service>
 </EsbConfiguration>

@@ -28,6 +28,10 @@ public class JavaServiceDirectory {
             case 1:
                 result = RabinKarp.run(stringArgs.get(0),stringArgs.get(1));
                 break;
+            case 5:
+                result = HuffmanCode.run(stringArgs.get(0));
+                break;    
+                
             /**
              * ex:
              * 
