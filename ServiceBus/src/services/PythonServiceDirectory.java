@@ -14,10 +14,21 @@ public class PythonServiceDirectory {
 
     public static String getService(int serviceID, ArrayList<String> argList) {
         
+        /** Adding a new Service **/
         String result;
         HashMap<Integer,String> pythonFileMap = new HashMap<>();
         pythonFileMap.put(2, "Calculator.py");
-      
+        pythonFileMap.put(4, "Naive.py");
+        
+        /**
+        * ex:
+        * 
+        * pythonFileMap.put(<serviceID>, <PythonfileName.py>);
+        * 
+        * 
+        */    
+        
+        
         result = run(pythonFileMap.get(serviceID),argList);  
         return result;
     }

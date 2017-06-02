@@ -40,4 +40,18 @@
       <RetryPolicy>100-sec-retry</RetryPolicy>
       <Info>Return Numbers in the Fibonacci sequence</Info>
    </Service>
+   <Service>
+      <ServiceName>naive</ServiceName>
+      <ServiceID>4</ServiceID> 
+      <ServiceType>python</ServiceType>
+      <Arguments>  
+        <NoOfArguments>2</NoOfArguments>  
+        <ArgumentType>String</ArgumentType>
+        <ArgumentType>String</ArgumentType>
+      </Arguments>
+      <DeadLetterDestination>DeadLetter</DeadLetterDestination>
+      <AuthConstraint>app-1</AuthConstraint>
+      <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>String matching using a brute force method</Info>
+   </Service>
 </EsbConfiguration>
