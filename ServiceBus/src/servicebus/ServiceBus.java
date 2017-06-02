@@ -281,6 +281,14 @@ public class ServiceBus implements Runnable{
                                         Service service = serviceMap.get(messageParts[1]);
                                         out.println("----------------------------------------------\n");
                                         out.println(service.getInfo());
+                                        int i = 1;
+                                        serviceInfo = messageParts[1];
+                                        for (String argument : serviceMap.get(serviceInfo).getArguments()) {
+                                            serviceInfo += " <param"+i+">"; i++;
+                                        }
+                                        out.println("SYNTAX: " + serviceInfo);
+                                        
+                                        
                                         out.println("\n----------------------------------------------");
                                         
                                     }

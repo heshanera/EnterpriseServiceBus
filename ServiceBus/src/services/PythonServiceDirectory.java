@@ -30,7 +30,8 @@ public class PythonServiceDirectory {
         argsList = argsList.substring(0, argsList.length()-1);
         
         PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("src/services/PythonServices/Calculator.py");
+        String filePath = "src/services/PythonServices/"+PythonFile;
+        interpreter.execfile(filePath);
         PyObject result = interpreter.eval("repr(run("+argsList+"))");
         return result.toString();
     }
