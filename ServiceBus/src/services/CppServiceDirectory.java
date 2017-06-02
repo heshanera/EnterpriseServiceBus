@@ -9,7 +9,9 @@ import java.util.ArrayList;
 public class CppServiceDirectory {
     
     static {
-        System.load("/home/heshan/Projects/NetBeansProjects/EnterpriseServiceBus/ServiceBus/src/services/CppServices/dist/libCppServices.so");
+        
+        String dir = System.getProperty("user.dir");
+        System.load(dir+"/src/services/CppServices/dist/libCppServices.so");
     }
     
     
