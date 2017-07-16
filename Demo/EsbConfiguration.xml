@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EsbConfiguration>
+   <Service>
+      <ServiceName>rabinkarp</ServiceName>
+      <ServiceID>1</ServiceID> 
+      <ServiceType>java</ServiceType>
+      <Arguments>  
+        <NoOfArguments>2</NoOfArguments>  
+        <ArgumentType>String</ArgumentType>
+        <ArgumentType>String</ArgumentType>
+      </Arguments>
+      <DeadLetterDestination>DeadLetter</DeadLetterDestination>
+      <AuthConstraint>app-1</AuthConstraint>
+      <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>string matching using Rabin-Karp Algorithm</Info>
+   </Service>
+   <Service>
+      <ServiceName>calc</ServiceName>
+      <ServiceID>2</ServiceID> 
+      <ServiceType>python</ServiceType>
+      <Arguments>  
+        <NoOfArguments>1</NoOfArguments>  
+        <ArgumentType>String</ArgumentType>
+      </Arguments>
+      <DeadLetterDestination>DeadLetter</DeadLetterDestination>
+      <AuthConstraint>app-1</AuthConstraint>
+      <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>Simple Calculator that solve Expressions</Info>
+   </Service>
+   <Service>
+      <ServiceName>fib</ServiceName>
+      <ServiceID>3</ServiceID> 
+      <ServiceType>cpp</ServiceType>
+      <Arguments>  
+        <NoOfArguments>1</NoOfArguments>  
+        <ArgumentType>Integer</ArgumentType>
+      </Arguments>
+      <DeadLetterDestination>DeadLetter</DeadLetterDestination>
+      <AuthConstraint>app-1</AuthConstraint>
+      <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>Return Numbers in the Fibonacci sequence</Info>
+   </Service>
+   <Service>
+      <ServiceName>naive</ServiceName>
+      <ServiceID>4</ServiceID> 
+      <ServiceType>python</ServiceType>
+      <Arguments>  
+        <NoOfArguments>2</NoOfArguments>  
+        <ArgumentType>String</ArgumentType>
+        <ArgumentType>String</ArgumentType>
+      </Arguments>
+      <DeadLetterDestination>DeadLetter</DeadLetterDestination>
+      <AuthConstraint>app-1</AuthConstraint>
+      <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>String matching using a brute force method</Info>
+   </Service>
+   <Service>
+      <ServiceName>huffman</ServiceName>
+      <ServiceID>5</ServiceID> 
+      <ServiceType>java</ServiceType>
+      <Arguments>  
+        <NoOfArguments>1</NoOfArguments>  
+        <ArgumentType>String</ArgumentType>
+      </Arguments>
+      <DeadLetterDestination>DeadLetter</DeadLetterDestination>
+      <AuthConstraint>app-1</AuthConstraint>
+      <RetryPolicy>100-sec-retry</RetryPolicy>
+      <Info>Converting an String in to a Huffman Code</Info>
+   </Service>
+</EsbConfiguration>
