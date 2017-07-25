@@ -8,12 +8,12 @@ Service Bus which enables multiple services to interact with each other. Impleme
 
 &nbsp;&nbsp;
 ## How to Run
-&nbsp;
-### Go to the 'Demo' directory
+
+##### Go to the 'Demo' directory
         > cd Demo
-### Starting the serice bus:
+##### Starting the serice bus:
         > java -jar ServiceBus.jar
-### Starting the client/s:
+##### Starting the client/s:
         > java -jar Client.jar
 
 
