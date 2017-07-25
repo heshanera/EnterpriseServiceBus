@@ -8,8 +8,6 @@ Service Bus which enables multiple services to interact with each other. Impleme
 
 ## How to Run
 
-*** ServiceBus uses the port '5001'. Please free the port if it is already in use, before starting the application. ***
-
 ### Go to the 'Demo' directory
         > cd Demo
 ### Starting the serice bus:
