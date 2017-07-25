@@ -8,7 +8,7 @@ Service Bus which enables multiple services to interact with each other. Impleme
 
 ## How to Run
 
-***ServiceBus uses the port '5001'. Please free the port before starting the application.
+***ServiceBus uses the port '5001'. Please free the port if it is already in use, before starting the application.
 
 ### Go to the 'Demo' directory
         > cd Demo
@@ -18,7 +18,7 @@ Service Bus which enables multiple services to interact with each other. Impleme
         > java -jar Client.jar
 
 ## Adding a Service
-	1. Adding the configuration parameter of the service in 'EsbConfiguration.xml' 
+	1. Adding the configuration parameters of the service to 'EsbConfiguration.xml'
 
 	### Java
 		2. Add the service to '/ServiceBus/src/services/javaServices'

@@ -1,4 +1,4 @@
-***ServiceBus uses the port '5001'. Please free the port before starting the application.
+***ServiceBus uses the port '5001'. Please free the port if it is already in use, before starting the application.
 
 ## Starting the serice bus:
         java -jar ServiceBus.jar
@@ -6,7 +6,7 @@
         java -jar Client.jar
 
 ## Adding a Service
-	1. Adding the configuration parameter of the service in 'EsbConfiguration.xml' 
+	1. Adding the configuration parameters of the service to 'EsbConfiguration.xml'
 
 	### Java
 		2. Add the service to '/ServiceBus/src/services/javaServices'
