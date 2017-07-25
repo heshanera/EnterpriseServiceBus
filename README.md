@@ -5,9 +5,10 @@ Service Bus which enables multiple services to interact with each other. Impleme
 ## High-Level Architecture
 ![architecture](https://github.com/heshanera/EnterpriseServiceBus/blob/master/imgs/ServiceBus.png)
 
-***ServiceBus uses the port '5001'. Please free the port before starting the application.
 
 ## How to Run
+
+***ServiceBus uses the port '5001'. Please free the port before starting the application.
 
 ### Go to the 'Demo' directory
         > cd Demo
