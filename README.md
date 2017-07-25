@@ -6,8 +6,9 @@ Service Bus which enables multiple services to interact with each other. Impleme
 ![architecture](https://github.com/heshanera/EnterpriseServiceBus/blob/master/imgs/ServiceBus.png)
 
 
+&nbsp;&nbsp;
 ## How to Run
-
+&nbsp;
 ### Go to the 'Demo' directory
         > cd Demo
 ### Starting the serice bus:
@@ -15,6 +16,8 @@ Service Bus which enables multiple services to interact with each other. Impleme
 ### Starting the client/s:
         > java -jar Client.jar
 
+
+&nbsp;&nbsp;
 ## Adding a Service
 
 - Adding the configuration parameters of the service to 'EsbConfiguration.xml'
@@ -34,7 +37,8 @@ Service Bus which enables multiple services to interact with each other. Impleme
 	- Add the service info to '/ServiceBus/src/services/CppServices/CppServiceDirectory.cpp'
 	- Compile
 
-### Commands
+&nbsp;&nbsp;
+## Commands
 
 | Command       | Description   |
 | ------------- |:-------------:|
