@@ -67,7 +67,8 @@ public class ServiceBus implements Runnable{
                 System.out.println("*** Connected to the client"+k); k++;
             }
         } catch (IOException ex) {
-            Logger.getLogger(ServiceBus.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ServiceBus.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("port '5001' is already in use! Please free the port and start the ServiceBus again");
         }
     }
     
