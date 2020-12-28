@@ -10,11 +10,11 @@ Service Bus which enables multiple services to interact with each other. Impleme
 ## How to Run
 
 ##### Go to the 'Demo' directory
-        > cd Demo
+        cd Demo
 ##### Starting the serice bus:
-        > java -jar ServiceBus.jar
+        java -jar ServiceBus.jar
 ##### Starting the client/s:
-        > java -jar Client.jar
+        java -jar Client.jar
 
 
 &nbsp;&nbsp;
@@ -41,10 +41,10 @@ Service Bus which enables multiple services to interact with each other. Impleme
 ## Commands
 
 | Command       | Description   |
-| ------------- |:-------------:|
-| > man | return the list of commands |
-| > man <serviceName\> | return the service info |
-| > list | return the list of services  |
-| > exit | disconnect from the Service Bus |
-| > <serviceName\> <param1\> ... | calling a service |
+| ------------- |-------------|
+| man | return the list of commands |
+| man <serviceName\> | return the service info |
+| list | return the list of services  |
+| exit | disconnect from the Service Bus |
+| <serviceName\> <param1\> ... | calling a service |
 	
